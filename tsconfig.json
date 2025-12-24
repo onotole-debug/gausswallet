@@ -32,9 +32,7 @@
   },
   "include": [
     "app/**/*",
-    "index.js",
-    "metro.config.js",
-    "babel.config.js"
+    "index.js"
   ],
   "exclude": [
     "node_modules",

@@ -133,8 +133,8 @@ export const verifySignature = (
   address: string,
 ): boolean => {
   try {
-    const wallet = EthersWallet.verifyMessage(message, signature);
-    return wallet.toLowerCase() === address.toLowerCase();
+    const recoveredAddress = EthersWallet.verifyMessage(message, signature);
+    return recoveredAddress.toLowerCase() === address.toLowerCase();
   } catch (error) {
     console.error('[verifySignature Error]', error);
     return false;

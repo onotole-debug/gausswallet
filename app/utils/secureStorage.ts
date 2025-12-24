@@ -161,8 +161,13 @@ export const getWalletName = async (): Promise<string | null> => {
 export const hasWallet = async (): Promise<boolean> => {
   try {
     const address = await getWalletAddress();
-    const privateKey = await getPrivateKey();
-    return !!address && !!privateKey;
+    if (!address) return false;
+
+    // Check if private key exists without retrieving the actual value
+    const credentials = await Keychain.getGenericPassword({
+      service: CONFIG.SECURE_KEYS.PRIVATE_KEY,
+    });
+    return !!credentials;
   } catch (error) {
     console.error('[hasWallet Error]', error);
     return false;
