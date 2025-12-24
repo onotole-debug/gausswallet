@@ -104,7 +104,9 @@ export const WalletProvider: React.FC<{children: React.ReactNode}> = ({
 
       // Store securely
       await storePrivateKey(walletData.privateKey);
-      await storeMnemonic(walletData.mnemonic!);
+      if (walletData.mnemonic) {
+        await storeMnemonic(walletData.mnemonic);
+      }
       await storeWalletAddress(walletData.address);
       if (name) {
         await storeWalletName(name);

@@ -6,6 +6,7 @@
 import * as bip39 from 'bip39';
 import {HDNode} from '@ethersproject/hdnode';
 import {Wallet as EthersWallet} from '@ethersproject/wallet';
+import {keccak256} from '@ethersproject/keccak256';
 import CryptoJS from 'crypto-js';
 import type {
   PrivateKeyData,
@@ -109,8 +110,8 @@ export const signTransaction = async (
     // Sign transaction
     const signedTx = await wallet.signTransaction(tx);
 
-    // Compute transaction hash
-    const hash = CryptoJS.SHA256(signedTx).toString();
+    // Compute transaction hash using keccak256 (Ethereum standard)
+    const hash = keccak256(signedTx);
 
     return {
       ...transaction,
@@ -126,6 +127,8 @@ export const signTransaction = async (
 
 /**
  * Verify a signature
+ * Note: This verifies a signed message, not a transaction signature
+ * For transaction verification, the blockchain backend should verify the signature
  */
 export const verifySignature = (
   message: string,

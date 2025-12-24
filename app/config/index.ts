@@ -5,7 +5,7 @@
 export const CONFIG = {
   // Blockchain API Configuration
   BLOCKCHAIN_API: {
-    BASE_URL: process.env.BLOCKCHAIN_API_URL || 'https://api.gauss.network',
+    BASE_URL: process.env.BLOCKCHAIN_API_URL || 'https://api-testnet.gauss.network',
     TIMEOUT: 30000,
   },
 
